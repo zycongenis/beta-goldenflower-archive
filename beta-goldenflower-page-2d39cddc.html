@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>炸金花 · 一段熟悉的故事</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f0f0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #2c3e4f;
+      line-height: 1.675;
+      padding: 2rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 860px;
+      width: 100%;
+    }
+
+    /* 开场短句 —— 浅灰底色, 细边框 */
+    .opening {
+      background: #fafafa;
+      border: 1px solid #dadce0;
+      padding: 2.4rem 1.8rem;
+      margin-bottom: 2rem;
+      border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .opening p {
+      font-size: 1.5rem;
+      font-weight: 350;
+      letter-spacing: 0.02rem;
+      color: #1f2a36;
+    }
+
+    .opening .small-line {
+      display: block;
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #4d5b6b;
+      border-left: 4px solid #b0b8c3;
+      padding-left: 1rem;
+    }
+
+    /* 承接段落 卡片 */
+    .bridge {
+      background: #ffffff;
+      border: 1px solid #dde1e6;
+      border-radius: 28px;
+      padding: 2rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .bridge p {
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+    }
+
+    .bridge p:last-child {
+      margin-bottom: 0;
+    }
+
+    .bridge .highlight {
+      background: #f3f5f8;
+      padding: 0.1rem 0.6rem;
+      border-radius: 40px;
+      font-weight: 450;
+      color: #1f3a4b;
+    }
+
+    /* 特点列表 —— 卡片式条目 */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .feature-item {
+      background: #ffffff;
+      border: 1px solid #e2e6eb;
+      border-radius: 20px;
+      padding: 1.5rem 1.3rem;
+      flex: 1 1 220px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s;
+    }
+
+    .feature-item:hover {
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .feature-item h3 {
+      font-size: 1.2rem;
+      font-weight: 510;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      color: #1e2b39;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #3d4e61;
+    }
+
+    /* 温和结尾 + 链接嵌入 */
+    .closing {
+      background: #f7f8fa;
+      border: 1px solid #d9dee3;
+      border-radius: 28px;
+      padding: 2rem 1.8rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .closing p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .closing p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .closing a {
+      color: #1a4b6a;
+      text-decoration: none;
+      border-bottom: 1px dashed #8f9eb0;
+      font-weight: 460;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .closing a:hover {
+      border-bottom: 1px solid #1a4b6a;
+      color: #0b2c40;
+    }
+
+    /* 小字 / faq 摘要风格 */
+    .faq-note {
+      background: #ffffff;
+      border: 1px solid #e1e5eb;
+      border-radius: 24px;
+      padding: 1.5rem 1.8rem;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.01);
+      margin-bottom: 2rem;
+    }
+
+    .faq-note summary {
+      font-weight: 500;
+      cursor: default;
+      color: #2f4052;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .faq-note p {
+      font-size: 0.95rem;
+      color: #3d5367;
+      margin-bottom: 0.3rem;
+    }
+
+    .faq-note .q {
+      margin-top: 0.8rem;
+      font-weight: 480;
+      color: #1b3346;
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      body { padding: 1.2rem 0.8rem; }
+      .opening p { font-size: 1.3rem; }
+      .bridge, .opening, .closing, .faq-note { padding: 1.5rem 1.2rem; }
+      .feature-item { flex: 1 1 100%; }
+    }
+
+    /* 静默 footer */
+    .silent {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9caab9;
+      letter-spacing: 0.02rem;
+      border-top: 1px solid #e2e6ec;
+      padding-top: 1.8rem;
+      margin-top: 0.6rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 开场短句 -->
+  <div class="opening">
+    <p>有些纸牌局，不靠运气也不靠套路，只靠一点点熟悉感。</p>
+    <span class="small-line">—— 炸金花，还是老规矩，舒服就好。</span>
+  </div>
+
+  <!-- 承接段落：稳定入口和页面说明 -->
+  <div class="bridge">
+    <p>
+      炸金花这个玩法，说来也简单：三张牌，比大小，看胆量。可偏偏就是这种直来直去的节奏，让许多人在茶余饭后、朋友小聚时总会想到它。不需要复杂规则，不用翻来覆去地记牌型，开局就能上手。
+    </p>
+    <p>
+      如果你也在找一处可以安静玩两局、不被打扰的角落，那么 <span class="highlight">beta-goldenflower.com</span> 这个页面就是一个很自然的入口。没有弹窗干扰，没有花哨引导，只有一局一局的牌局和熟悉的对局节奏。你可以随时打开，也可以随时放下。
+    </p>
+    <p>
+      这里需要提一句：我们所说的稳定，是指页面本身轻量、响应快，不会因为设备不同而出现奇怪的布局错位。无论是手机还是电脑，打开之后界面都一样干净。
+    </p>
+  </div>
+
+  <!-- 特点列表 -->
+  <div class="features">
+    <div class="feature-item">
+      <h3>经典规则</h3>
+      <p>豹子、同花顺、金花、顺子…… 沿用最广为人知的炸金花牌型顺序，不必重新适应。</p>
+    </div>
+    <div class="feature-item">
+      <h3>轻量界面</h3>
+      <p>没有多余装饰，每一局都以卡片形式呈现，视觉重点始终在牌面和操作上。</p>
+    </div>
+    <div class="feature-item">
+      <h3>稳定载入</h3>
+      <p>基于静态页面部署，加载速度快，游戏过程中不会无故刷新或卡顿。</p>
+    </div>
+  </div>
+
+  <!-- 温和结尾 + 链接嵌入句子 -->
+  <div class="closing">
+    <p>
+      如果你之前一直在找一处可以随时开局、又不用注册或下载的地方，那么不妨试试看。整个页面就像一张干净的牌桌，你直接坐下来就可以。
+    </p>
+    <p>
+      这里就是 <a href="https://beta-goldenflower.com">炸金花游戏</a> 的稳定入口，一个给你留好位子的在线牌桌。没有催促，没有多余步骤，打开即是牌局。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要 / 提示 -->
+  <div class="faq-note">
+    <summary>┃ 一些你可能想知道的事</summary>
+    <p class="q">Q：需要注册或登录吗？</p>
+    <p>A：不需要。打开页面直接参与，没有账号体系，也不收集任何信息。</p>
+    <p class="q">Q：可以在手机上玩吗？</p>
+    <p>A：可以。页面自适应屏幕，手机、平板、电脑的显示效果都很自然。</p>
+    <p class="q">Q：牌局数据会保留吗？</p>
+    <p>A：不会。每局结束后数据即清除，不留记录，专注于当前一局。</p>
+  </div>
+
+  <!-- 细脚注，保持干净 -->
+  <div class="silent">
+    一个安静的炸金花落脚处 · 随时来，随时走
+  </div>
+
+</div>
+</body>
+</html>
